@@ -5,31 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <base href="/" />
-    <title>게시판 예제</title>
+    <title>게시판 예제 | 상세 페이지</title>
+    <link rel="stylesheet" href="./default.css">
     <style>
-        body::-webkit-scrollbar {
-            display: none;
-        }
-        body {
-            /* overflow-y: scroll; */
-            -ms-overflow-style: none;  /* IE and Edge */
-            scrollbar-width: none;  /* Firefox */
-            margin: 0 auto 10vh;
-            width: 75vw;
-        }
-        nav {
-            display: flex;
-            justify-content: center;
-            padding: 25px 0;
-        }
-        a {
-            text-decoration: none;
-            font-size: 20px;
-            text-align: center;
-            color: black;
-            font-weight: bold;
-            flex-basis: 200px;
-        }
         #title {
             text-align: center;
             font-size: 32px;
@@ -113,6 +91,13 @@
     <div id = "buttons">
         <button id = "update">수 정</button>
         <button id = "delete">삭 제</button>
+    </div>
+    <form id = "form">
+        <textarea id="input_comment" ></textarea>
+        <button type="submit">입력</button>
+    </form>
+    <div id="comment-list">
+
     </div>
 
 

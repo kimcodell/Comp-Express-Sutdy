@@ -5,50 +5,28 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <base href="/" />
-    <title>게시판 예제</title>
+    <title>게시판 예제 | 글쓰기</title>
+    <link rel="stylesheet" href="./default.css">
     <style>
-        body::-webkit-scrollbar {
-            display: none;
-        }
-        body {
-            /* overflow-y: scroll; */
-            -ms-overflow-style: none;  /* IE and Edge */
-            scrollbar-width: none;  /* Firefox */
-            margin: 0 auto 10vh;
-            width: 75vw;
-        }
-        nav {
-            display: flex;
-            justify-content: center;
-            padding: 25px 0;
-        }
-        a {
-            text-decoration: none;
-            font-size: 20px;
-            text-align: center;
-            color: black;
-            font-weight: bold;
-            flex-basis: 200px;
-        }
         h1 {
             text-align: center;
         }
 
         #input_title {
             display: block;
-            width: 55vw;
+            width: 75vw;
             height: 5vh;
             font-size: 18px;
-            margin: 0 10vw 1rem 10vw;
+            margin-bottom: 16px;
         }
 
         #input_contents {
             display: block;
-            width: 55vw;
+            width: 75vw;
             min-height: 80vh;
             font-size: 18px;
             border-width: 2px;
-            margin: 0 10vw 0 10vw;
+            resize:vertical;
         }
 
         .submit_btn {

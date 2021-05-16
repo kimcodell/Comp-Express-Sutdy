@@ -3,14 +3,6 @@ const express = require('express');
 const path = require('path');
 const mysql = require('mysql');
 
-const { sequelize } = require('./models');
-
-sequelize.sync({ force: false })
-    .then(() => {
-        console.log("DB 연결 성공");
-    })
-    .catch(console.log);
-    
 const app = express();
 
 const databaseInfo = fs.readFileSync('./databaseInfo.json');
@@ -42,18 +34,24 @@ app.get('/post', (req, res) => {
     res.sendFile(path.join(__dirname, './client/post.html'))
 })
 
+//수정 페이지
+app.get('/update/:id', (req, res) => {
+    res.sendFile(path.join(__dirname, './client/post.html'))
+})
+
 //글쓰기 POST 요청
 app.post('/post', (req, res) => {
     console.log(req.body);
     connection.query(
         `INSERT INTO COMP.POSTING (title, contents) VALUE ('${req.body.title}', '${req.body.contents}')`
     )
+    res.sendFile(path.join(__dirname, './client/list.html'));
 })
 
 //게시글 데이터 요청
 app.get('/post-data', (req, res) => {
     connection.query(
-        "SELECT * FROM POSTING",
+        "SELECT * FROM POSTING WHERE DELETED = 0 ORDER BY ID DESC",
         (err, rows, fields) => {
             res.send(rows);
         }
@@ -68,19 +66,58 @@ app.get('/detail/:id', (req, res) => {
 //각각의 상세 내용 데이터 요청
 app.get('/detail-data/:id', (req, res) => {
     connection.query(
-        `SELECT * FROM POSTING WHERE ID = ${req.params.id}`,
+        `SELECT * FROM COMP.POSTING as p left outer join COMP.COMMENT as c on p.Id = c.post_id where p.id = ${req.params.id} and p.deleted = 0`,
+        // `SELECT * FROM POSTING left outer join comment WHERE posting.ID = ${req.params.id} AND DELETED = 0`,
         (err, rows, fields) => {
             res.send(rows);
         }
     )
 })
 
+//댓글 추가
+app.post('/post-comment/:id', (req, res) => {
+    connection.query(
+        `INSERT INTO COMP.COMMENT (POST_ID, COMMENTS) VALUE ('${req.params.id}', '${req.body.comment}')`
+    )
+})
+
+//댓글 수정
+
+
+//댓글 삭제
+
+
+
+//게시글 수정
+app.put('/update/:id', (req, res) => {
+    connection.query(
+        `UPDATE COMP.POSTING SET TITLE = "${req.body.title}", CONTENTS = "${req.body.contents}" WHERE id = ${req.params.id}`
+    )
+    res.sendFile(path.join(__dirname, './client/list.html'));
+})
+    
+//soft delete
+app.delete('/:id', (req, res) => {
+    connection.query(
+        `UPDATE COMP.POSTING SET DELETED = 1 WHERE id = ${req.params.id}`
+    )
+    res.sendFile(path.join(__dirname, './client/list.html'))
+})
+        
+//완전히 delete
+// app.delete('/:id', (req, res) => {
+//     connection.query(
+//         `DELETE FROM COMP.COMMENTS WHERE POST_ID = ${req.params.id}
+//         DELETE FROM COMP.POSTING WHERE id = ${req.params.id}`
+//     )
+// })
+                
 //js 파일 등 기타 파일 전송
 app.get('/:filename', (req, res) => {
     res.sendFile(path.join(__dirname, `./client/${req.params.filename}`))
 })
-
-
+                
+                
 //에러 처리 미들웨어
 app.use((err, req, res, next) => {
     console.log(err);

@@ -1,8 +1,10 @@
+import axios from 'axios';
+
 async function getPost() {
     try {
         const res = await axios.get("/post-data");
         const postList = res.data;
-        // console.log(res.data);
+        console.log(res.data);
         const list = document.querySelector('#post-list');
     
         postList.map((key) => {

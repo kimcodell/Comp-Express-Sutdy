@@ -10,11 +10,9 @@
   "author": "jordan",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.21.1",
     "express": "^4.17.1",
-    "mysql": "^2.18.1",
-    "mysql2": "^2.2.5",
-    "sequelize": "^6.6.2",
-    "sequelize-cli": "^6.2.0"
+    "mysql": "^2.18.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.7"
