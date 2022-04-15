@@ -3,9 +3,9 @@
 ### 중앙대학교 웹/앱 개발 중앙 동아리 COMP
 중앙대학교 웹/앱 개발 중앙 동아리 COMP에서 2021년 1학기 스터디 중 진행한 Node.js 스터디 예제
 
-동아리 내 HTML, CSS, JS, Node.js 멘토로 활동함.
+HTML, CSS, JS, Node.js 멘토
 
-HTML, CSS, JS와 Node.js로 게시판 만들기 실습을 진행.
+HTML, CSS, JS와 Node.js로 게시판 만들기 실습 진행.
 
 ## 설명
 직접 데이터베이스와 서버를 설계 및 구축해보고, 서버와 프론트 간 연결을 스터디.
